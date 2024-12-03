@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>Sagar Bhattarai - Media Coverage</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="css/bootstrap.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/component.css">
+      <link href='https://fonts.googleapis.com/css?family=Lato:300italic,400italic,600italic,700italic,800italic,400,600,700,800,300' rel='stylesheet' type='text/css'>
+      <style>
+         /* Header */
+         .media-header {
+            text-align: center;
+            font-size: 20px;
+            <!--font-weight: bold;-->
+            padding: 15px 0;
+            color: black;
+         }
+
+         /* Buttons for Sections */
+         .media-buttons {
+            text-align: center;
+            margin: 20px 0;
+         }
+
+         .media-buttons button {
+            margin: 7px;
+            padding: 15px 30px;
+            font-size: 16px;
+            background-color: #a6a1a1;
+            color: white;
+            border:none ;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+         }
+
+         .media-buttons button:hover {
+            background-color: #0056b3;
+         }
+
+         /* Sections */
+         .media-section {
+            display: none; /* Hide sections by default */
+            margin-top: 30px;
+         }
+
+         .media-section.active {
+            display: flex; /* Show active section as flex */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+         }
+
+         /* Link Styling */
+         .media-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+            padding: 10px 15px;
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease;
+         }
+
+         .media-link:hover {
+            transform: scale(1.05);
+            color: #0056b3;
+         }
+
+         /* Mimic YouTube Logo for YouTube Links */
+         .youtube-logo {
+            display: inline-block;
+            background-color: red;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+            text-align: center;
+         }
+
+        /* Gallery Styling */
+.image-gallery img {
+   width: 1250px; /* Constrains the image width to 1250px */
+   height: 808px; /* Constrains the image height to 808px */
+   object-fit: cover; /* Ensures the image fills the specified dimensions */
+   border-radius: 8px; /* Keeps the rounded corners */
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds a shadow for style */
+   display: block; /* Prevents extra spacing caused by inline images */
+   margin: 20px auto; /* Adds 20px space above and below, centers the image horizontally */
+}
+
+
+      </style>
+   </head>
+   <body>
+      <!-- Include Header -->
+      <div data-include="header"></div>
+
+      <div class="container">
+         <h3 class="media-header">Media Coverage</h3>
+         
+         <!-- Buttons for Sections -->
+         <div class="media-buttons">
+            <button onclick="showSection('facebook-section')">Facebook Coverage</button>
+            <button onclick="showSection('youtube-section')">YouTube Coverage</button>
+            <button onclick="showSection('gallery-section')">Image Gallery</button>
+         </div>
+
+         <!-- Facebook Coverage Section -->
+         <div id="facebook-section" class="media-section">
+            <a href="https://www.facebook.com/100069786133671/posts/853599160309614/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> ষ্টেনফ'ৰ্ড বিশ্ববিদ্যালয়ৰ World's Top 2% Scientists ....see more
+            </a>
+            <a href="https://www.facebook.com/100064062369322/posts/927490626063008/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> IIT गुवाहाटी अनुसन्धान वैज्ञानिक हाम्रो गोर्खे छोरा डा. सागर भट्टराई विश्वका ... see more
+            </a>
+            <a href="https://www.facebook.com/share/v/JVcHGDKcPJ5erjiu/?mibextid=jmPrMh" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> বিশ্বৰ শ্ৰেষ্ঠ ২ শতাংশ বিজ্ঞানীৰ তালিকাত ... see more
+            </a>
+            <a href="https://fb.watch/uKcnnw3OsX/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> শ্ৰেষ্ঠ বিজ্ঞানীৰ তালিকাত নাম সন্নিবিষ্ট ছিপাঝাৰৰ যুৱকৰ ... see more
+            </a>
+            <a href="https://www.facebook.com/share/v/1J81rqwqWR1deb4D/?mibextid=xfxF2i" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> ছিপাঝাৰ গেৰেণ্ট গাঁৱৰ ডঃ সাগৰ ভট্টৰায় ষ্টেণ্ডফৰ্ড ... see more
+            </a>  
+            <a href="https://www.facebook.com/share/v/HyufqfcUg86RrMYR/?mibextid=qi2Omg" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> বিশ্বৰ শ্ৰেষ্ঠ দুই শতাংশ বিজ্ঞানীৰ ... see more
+            </a>
+            <a href="https://www.facebook.com/sangbadlahar09/videos/1186119422689776/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> ষ্টেণ্ডফৰ্ড বিশ্ববিদ্যালয়ে প্ৰকাশ কৰা শ্ৰেষ্ঠ  ... see more
+            </a>
+            <a href="https://www.facebook.com/share/v/NSmNMpyzaCQ2bJU8/?mibextid=qi2Omg" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> অসমলৈ সুনাম কঢ়িয়ালে ছিপাঝাৰ গেৰেণ্ট ... see more
+            </a>
+            <a href="https://www.facebook.com/AGWebTV/videos/1718144265652084/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> दरङ जिल्ला अन्तर्गत, टी. के. ग्रान्ट गाउँका हिन्दी शिक्षक तङ्क प्रशाद.. see more
+            </a>
+            <a href="https://www.facebook.com/61550263392667/videos/414249358359820/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> दारांग जिल्लाको ग्रान्ट निवासी डा. सागर भट्टराईले स्टान्फोर्ड विश्वविद्यालय विश्वका ... see more
+            </a>
+            <a href="https://www.facebook.com/100052454907303/posts/1120042736420879/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> শেহতীয়াকৈ আমেৰিকা যুক্তৰাষ্ট্ৰৰ ষ্টেণ্ডফ'ৰ্ড বিশ্ববিদ্যালয়ে প্ৰকাশ কৰা বিশ্বৰ শ্ৰেষ্ঠ ২ ... see more
+            </a>
+            <a href="https://www.facebook.com/100064752562944/posts/939162804918796/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> Stanford_University (USA) ৰ বিশ্বৰ আগশাৰীৰ ২% বিজ্ঞানীৰ ৰেংকিঙৰ তালিকাত IIT ... see more
+            </a>
+            <a href="https://www.facebook.com/100003672795712/posts/3212133268919068/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> Stanford University (USA) ৰ বিশ্বৰ আগশাৰীৰ ২% বিজ্ঞানীৰ ৰেং ... see more
+            </a>
+            <a href="https://www.facebook.com/nd24assam/videos/7886738231432212/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> বিশ্বৰ শ্ৰেষ্ঠ ২% বিজ্ঞানীৰ তালিকাত নাম সন্নিৱিষ্ট ড০ সাগৰ ... see more
+            </a>
+            <a href="https://www.facebook.com/100083716147819/videos/550366864371777/?mibextid=rS40aB7S9Ucbxw6v&ref=sharing" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> দৰঙৰ সুসন্তান বিজ্ঞানী ড০ সাগৰ ভট্টৰায়লৈ বৰুৱাবাৰী ৰাস ... see more
+            </a>
+            <a href="https://www.facebook.com/share/v/NSmNMpyzaCQ2bJU8/?mibextid=qi2Omg" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> অসমলৈ সুনাম কঢ়িয়ালে ছিপাঝাৰ গেৰেণ্ট ... see more
+            </a>
+            <a href="https://www.facebook.com/share/v/NSmNMpyzaCQ2bJU8/?mibextid=qi2Omg" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> অসমলৈ সুনাম কঢ়িয়ালে ছিপাঝাৰ গেৰেণ্ট ... see more
+            </a>
+            <a href="https://www.facebook.com/share/v/NSmNMpyzaCQ2bJU8/?mibextid=qi2Omg" target="_blank" class="media-link">
+               <i class="fa fa-facebook"></i> অসমলৈ সুনাম কঢ়িয়ালে ছিপাঝাৰ গেৰেণ্ট ... see more
+            </a>
+         </div>
+
+         <!-- YouTube Coverage Section -->
+         <div id="youtube-section" class="media-section">
+            <a href="https://youtu.be/2aXtBtlaHss?si=UFWjFubi_PwBneSz" target="_blank" class="media-link">
+               <span class="youtube-logo">YouTube</span> গেৰেণ্ট গাঁৱৰ ডঃ সাগৰ ভট্টৰায় ষ্টেণ্ডফৰ্ড বিশ্ববিদ্যালয়ে প্ৰকাশ কৰা বিশ্বৰ শ্ৰেষ্ঠ ২ শতাংশ বিজ্ঞানী
+            </a>
+            <a href="https://youtu.be/854QCf_DwPU?si=AbnKOhip23Ww3GaO" target="_blank" class="media-link">
+               <span class="youtube-logo">YouTube</span> বিশ্বৰ শ্ৰেষ্ঠ দুই শতাংশ বিজ্ঞানীৰ তালিকাত ছিপাঝাৰৰ ডঃ সাগৰ ভট্টৰায়
+
+            </a>
+         </div>
+
+         <!-- Image Gallery Section -->
+         <div id="gallery-section" class="media-section">
+            <img src="images/Image 1.jpeg" alt="Image 1">
+            <img src="images/Image 2.jpeg" alt="Image 2">
+            <img src="images/Image 3.jpeg" alt="Image 3">
+            <img src="images/Image 4.jpeg" alt="Image 4">
+            <img src="images/Image 5.jpeg" alt="Image 5">
+            <img src="images/Image 6.jpeg" alt="Image 6">
+            <img src="images/Image 7.jpeg" alt="Image 7">
+            <img src="images/Image 8.jpeg" alt="Image 8">
+            
+         </div>
+      </div>
+
+      <!-- Include Footer -->
+      <div data-include="footer"></div>
+
+      <!-- Javascript -->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.js"></script>
+      <script>
+         // Function to import header and footer
+         $(function () {
+            $('[data-include]').each(function () {
+               var file = $(this).data('include');
+               $(this).load(file + '.html');
+            });
+         });
+
+         // Function to show the selected section
+         function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.media-section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Show the selected section
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');
+         }
+
+         // Show the first section by default
+         document.addEventListener('DOMContentLoaded', () => {
+            showSection('facebook-section');
+         });
+      </script>
+   </body>
+</html>
