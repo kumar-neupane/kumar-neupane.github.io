@@ -1,0 +1,47 @@
+---
+layout: default
+title: Blog Tags
+permalink: /blog/tags/
+---
+
+<div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      
+      <h1>Blog Tags</h1>
+      <p class="lead">Browse posts by tag</p>
+      
+      <hr>
+
+      {% assign tags = site.posts | map: "tags" | join: "," | split: "," | uniq | sort %}
+      
+      {% for tag in tags %}
+        {% if tag != "" %}
+          <h2 id="{{ tag | slugify }}">{{ tag }}</h2>
+          <ul class="list-unstyled">
+            {% for post in site.posts %}
+              {% if post.tags contains tag %}
+                <li style="margin-bottom: 15px;">
+                  <a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong></a>
+                    
+
+                  <span class="text-muted">{{ post.date | date: "%B %d, %Y" }}</span>
+                  <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          <hr>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+<style>
+.text-muted {
+  color: #999;
+  font-size: 13px;
+}
+</style>
