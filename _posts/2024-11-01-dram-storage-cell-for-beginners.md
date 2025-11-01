@@ -164,7 +164,7 @@
         <p>Memory Systems - Cache Dram and Disk</p>
 
         <div class="footer-note">
-            Original article, please indicate the source when forwarding. Wowo Technology<br>
+            Original article, KumarNeupane<br>
             Tags: SDRAM dram
         </div>
     </div>
