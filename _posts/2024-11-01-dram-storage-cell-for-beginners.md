@@ -268,7 +268,7 @@
     </section>
 
     <div class="footer small">
-      © Your Blog — Feel free to reuse this page layout for other beginner hardware notes.
+      © KN
     </div>
   </div>
 </body>
