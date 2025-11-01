@@ -1,0 +1,171 @@
+---
+layout: default
+---
+
+<div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      
+      <!-- Post Header -->
+      <article class="post">
+        <header class="post-header">
+          <h1 class="post-title">{{ page.title }}</h1>
+          <p class="post-meta">
+            <span class="post-date">{{ page.date | date: "%B %d, %Y" }}</span>
+            {% if page.author %}<span class="post-author"> by {{ page.author }}</span>{% endif %}
+          </p>
+          
+          <!-- Categories and Tags -->
+          {% if page.categories or page.tags %}
+          <div class="post-tags-categories">
+            {% if page.categories %}
+              <div class="post-categories">
+                <strong>Categories:</strong>
+                {% for category in page.categories %}
+                  <a href="{{ site.baseurl }}/blog/categories/#{{ category | slugify }}" class="badge badge-info">{{ category }}</a>
+                {% endfor %}
+              </div>
+            {% endif %}
+            
+            {% if page.tags %}
+              <div class="post-tags">
+                <strong>Tags:</strong>
+                {% for tag in page.tags %}
+                  <a href="{{ site.baseurl }}/blog/tags/#{{ tag | slugify }}" class="badge badge-default">{{ tag }}</a>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          {% endif %}
+        </header>
+
+        <!-- Post Content -->
+        <div class="post-content">
+          {{ content }}
+        </div>
+
+        <!-- Post Footer with Share -->
+        <footer class="post-footer">
+          <hr>
+          <p><strong>Share this post:</strong></p>
+          <ul class="list-inline">
+            <li><a href="https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url }}&text={{ page.title }}" target="_blank" class="btn btn-sm btn-default">Twitter</a></li>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank" class="btn btn-sm btn-default">Facebook</a></li>
+            <li><a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank" class="btn btn-sm btn-default">LinkedIn</a></li>
+          </ul>
+        </footer>
+      </article>
+
+      <hr>
+
+      <!-- Comments Section using Utterances -->
+      <section class="comments">
+        <h3>Comments</h3>
+        <script src="https://utteranc.es/client.js"
+                repo="kumar-neupane/kumar-neupane.github.io"
+                issue-term="pathname"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </section>
+
+      <!-- Related Posts -->
+      {% assign posts = site.posts | where_exp: "post", "post.url != page.url" %}
+      {% if posts.size > 0 %}
+      <hr>
+      <section class="related-posts">
+        <h3>Related Posts</h3>
+        <ul class="list-unstyled">
+          {% for post in posts limit: 3 %}
+            <li>
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              <span class="text-muted">{{ post.date | date: "%B %d, %Y" }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+<style>
+.post-meta {
+  color: #999;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.post-tags-categories {
+  margin: 15px 0;
+}
+
+.post-categories, .post-tags {
+  margin: 10px 0;
+}
+
+.post-content {
+  line-height: 1.8;
+  font-size: 16px;
+  margin: 30px 0;
+}
+
+.post-content h2 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.post-content h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.post-content code {
+  background-color: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+}
+
+.post-content pre {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.post-footer {
+  margin-top: 30px;
+}
+
+.comments {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.related-posts {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.related-posts ul li {
+  margin-bottom: 10px;
+  padding: 8px 0;
+}
+
+.related-posts a {
+  font-weight: 500;
+}
+
+.text-muted {
+  color: #999;
+  font-size: 13px;
+  margin-left: 10px;
+}
+</style>
