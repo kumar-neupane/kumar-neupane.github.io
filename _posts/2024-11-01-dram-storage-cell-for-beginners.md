@@ -1,121 +1,173 @@
----
-layout: post
-title: "The Tiny Secret of Your Computer's Memory: DRAM Storage Cells Explained for Beginners"
-date: 2024-11-01
-author: Kumar Neupane
-categories: [Basic Technologies, Computer Science]
-tags: [DRAM, memory, hardware, computer-architecture, beginner-guide]
-excerpt: "Every time you open an app or browse the web, your computer's DRAM (memory) is working hard. We break down the fundamental building block of this essential component: the DRAM storage cell."
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>DRAM Principle 1: DRAM Storage Cell</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .meta {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #1a5276;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        h3 {
+            color: #2874a6;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+        h4 {
+            color: #2980b9;
+            margin-top: 18px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        p, ul, ol {
+            margin-bottom: 14px;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .equation {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-left: 3px solid #3498db;
+            margin: 12px 0;
+            font-size: 1.05em;
+        }
+        .note {
+            background: #fff8e1;
+            padding: 12px;
+            border-left: 3px solid #ffc107;
+            margin: 18px 0;
+            font-style: italic;
+        }
+        .footer-note {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DRAM Principle 1: DRAM Storage Cell</h1>
+        <div class="meta">Author: codingbelief &nbsp;|&nbsp; Category: Basic Technologies</div>
 
-## Introduction: The Unsung Hero of Your Computer
+        <h2>1. Storage Capacitor</h2>
+        <p>DRAM Storage Cell uses Storage Capacitor to store bit information.</p>
 
-When you think about your computer, you probably think of the CPU (the brain) or the hard drive (the long-term storage). But there's another critical component: **DRAM (Dynamic Random Access Memory)**, often just called "RAM."
+        <p>It consists of the following 4 parts:</p>
+        <ul>
+            <li>A storage capacitor represents a logical 1 or 0 by the amount of charge stored in it, or by the voltage difference across its terminals.</li>
+            <li>The access transistor, when turned on or off, determines whether reading or modifying the information stored in the storage capacitor is allowed or prohibited.</li>
+            <li>The wordline determines whether the Access Transistor is open or closed.</li>
+            <li>The bitline is the only channel for external access to the Storage Capacitor. When the Access Transistor is activated, external access can read or write to the Storage Capacitor through the bitline.</li>
+        </ul>
 
-DRAM is your computer's short-term memory. It holds all the data and programs the CPU is actively using. It's fast, but it's also forgetful—if the power goes out, the data is gone. To understand why it's so forgetful, we need to look at its most basic building block: the **DRAM Storage Cell**.
+        <p>The Common terminal of the Storage Capacitor is connected to Vcc/2.</p>
+        <p>When the Storage Capacitor stores 1 information, the voltage at the other terminal is Vcc, and the stored charge is...</p>
+        <div class="equation">Q = +Vcc/2 × C</div>
+        <p>When the information stored in the Storage Capacitor is 0, the voltage at the other end is 0, and the stored charge at this time...</p>
+        <div class="equation">Q = -Vcc/2 × C</div>
 
-This post will break down this tiny, complex component into simple, easy-to-understand parts.
+        <h3>1.1 Data Reading and Writing Principles</h3>
+        <p>From the above structural diagram, we can easily deduce the data read/write process of the DRAM Storage Cell:</p>
+        <ul>
+            <li>When reading data, set the Wordline to logic high, enable the Access Transistor, and then read the state on the Bitline.</li>
+            <li>When writing data, first set the level state to be written to the Bitline, then open the Access Transistor and change the internal state of the Storage Capacitor through the Bitline.</li>
+        </ul>
 
----
+        <p>However, in practice, if the DRAM Storage Cell is read and written according to the above process, the following problems will be encountered:</p>
 
-## Part 1: The Basic DRAM Storage Cell (The Bucket and the Gate)
+        <ol>
+            <li><strong>The logic levels of the external circuitry are mismatched with those of the storage capacitor.</strong><br>
+            Because the bitline capacitance is much larger than that of the storage capacitor (typically more than 10 times), when the access transistor is turned on, the bitline voltage changes very little if the information stored in the storage capacitor is 1. External circuits cannot directly read the information stored in the storage capacitor through the bitline.</li>
 
-A single DRAM storage cell is designed to hold just **one bit of information** (a 1 or a 0). It is surprisingly simple, consisting of only two main parts:
+            <li><strong>After a read operation, the charge stored in the Storage Capacitor changes.</strong><br>
+            During a read operation, when the Access Transistor is turned on, the voltage difference between the Bitline and the Storage Capacitor terminals causes the amount of charge stored in the Storage Capacitor to change. This may ultimately lead to an inability to correctly determine the information stored in the Storage Capacitor during subsequent read operations.</li>
 
-### 1. The Storage Capacitor (The Tiny Bucket)
+            <li><strong>Due to the physical characteristics of the Capacitor, the stored charge will gradually decrease even without read/write operations.</strong><br>
+            This characteristic requires DRAM to actively perform charge recovery operations on the Storage Capacitor when there are no read/write operations.</li>
+        </ol>
 
-The capacitor is the actual storage unit. Think of it as a **tiny, leaky bucket** that holds an electrical charge.
+        <p>To address the aforementioned issues, DRAM incorporates the Differential Sense Amplifier in its design.</p>
 
-*   **Logical '1'**: The bucket is full of charge (high voltage).
-*   **Logical '0'**: The bucket is empty of charge (low voltage).
+        <h2>2. Differential Sense Amplifier</h2>
+        <p>The Differential Sense Amplifier consists of two main parts: a Sensing Circuit and a Voltage Equalization Circuit. Its primary function is to convert the information stored in the Storage Capacitor into the voltage corresponding to logic 1 or 0 and display it on the Bitline. Simultaneously, after a read operation, the Bitline restores the charge in the Storage Capacitor to its state before the read operation.</p>
 
-### 2. The Access Transistor (The Gate)
+        <p>In the following sections, we will examine the complete data reading and writing process to understand how the Differential Sense Amplifier works.</p>
 
-The transistor acts like a **gate or a switch**. It controls whether the "bucket" (capacitor) is connected to the outside world.
+        <h3>2.1 Read Operation</h3>
+        <p>A complete Read Operation consists of four stages: Precharge, Access, Sense, and Restore. The following sections will describe the complete process of reading Bit 1 from the Storage Capacitor.</p>
 
-*   **Gate Open**: Data can flow in or out of the capacitor.
-*   **Gate Closed**: The capacitor is isolated, and the data is locked inside (for a short time).
+        <h4>2.1.1 Precharge</h4>
+        <p>In this stage, the EQ signal is first used to turn on transistors Te1, Te2, and Te3, stabilizing the voltage on the Bitline and /Bitline lines at Vref, where Vref = Vcc/2. Then, the process proceeds to the next stage.</p>
 
-### How They Connect to the Outside World
+        <h4>2.1.2 Access</h4>
+        <p>After the Precharge phase, the voltage on the Bitline and /Bitline lines has stabilized at Vref. At this point, the Ta transistor is turned on by controlling the Wordline signal. The positive charge stored in the Storage Capacitor flows to the Bitline, thereby pulling the Bitline voltage up to Vref+. Then, the process proceeds to the next phase.</p>
 
-The cell is connected to two main wires:
+        <h4>2.1.3 Sense</h4>
+        <p>During the Access phase, the Bitline voltage is pulled up to Vref+, making Tn2 more conductive than Tn1, and Tp1 more conductive than Tp2.<br>
+        At this time, the SAN (Sense-Amplifier N-Fet Control) is set to logic 0, and the SAP (Sense-Amplifier P-Fet Control) is set to logic 1, i.e., Vcc. Because Tn2 is more conductive than Tn1, the voltage on /Bitline is pulled up to logic 0 by the SAN more quickly, and similarly, the voltage on Bitline is pulled up to logic 1 by the SAP more quickly. Then, Tp1 and Tn2 enter the conducting state, while Tp2 and Tn1 enter the cutoff state.<br>
+        Finally, the voltages of both Bitline and /Bitline reach a stable state, correctly representing the information bits stored by the Storage Capacitor.</p>
 
-*   **Wordline (The Key)**: This wire opens or closes the Access Transistor (the gate). When the Wordline is activated, the gate opens.
-*   **Bitline (The Data Highway)**: This is the only path for data to travel to and from the capacitor.
+        <h4>2.1.4 Restore</h4>
+        <p>After completing the Sense phase, the Bitline is at a stable logic 1 voltage Vcc, at which point the Bitline charges the Storage Capacitor. After a specific period of time, the Storage Capacitor's charge is restored to its state before the read operation.</p>
 
----
+        <p>Finally, by using the CSL signal, Tc1 and Tc2 are put into the conducting state, and the outside world can read the specific information from the Bitline.</p>
 
-## Part 2: The Problem with Simple Reading (The Whisper in the Crowd)
+        <h4>2.1.5 Timing</h4>
+        <p>The timing diagram of the entire Read Operation shows that Vcc is the voltage corresponding to logic 1 and Gnd is logic 0.</p>
 
-If the DRAM cell is so simple, why can't we just open the gate and read the charge? Because of two major problems:
+        <h2>3. Write Operation</h2>
+        <p>The initial process of a Write Operation is the same as that of a Read Operation, involving Precharge, Access, Sense, and Restore operations. The difference lies in the fact that a Write Recovery operation is performed after the Restore phase.</p>
 
-### Problem 1: The Signal is Too Weak
+        <h3>3.1 Write Recovery</h3>
+        <p>During the Write Recovery phase, the Write Enable (WE) signal is controlled to put Tw1 and Tw2 into the conducting state. At this time, Bitline is pulled to logic 0 by input, and /Bitline is pulled to logic 1 by /input.<br>
+        After a specific period of time, when the Storage Capacitor's charge is discharged to 0, the Access Transistor of the Storage Capacitor can be turned off by controlling Wordline, and the write operation to 0 is completed.</p>
 
-Imagine trying to hear a **whisper** (the tiny charge in the capacitor) in a **crowded room** (the long, high-capacity Bitline).
+        <h2>4. References</h2>
+        <p>Memory Systems - Cache Dram and Disk</p>
 
-*   When the gate opens, the capacitor's charge flows onto the Bitline.
-*   However, the Bitline is much larger than the capacitor (often 10 times larger!). The tiny charge from the capacitor barely changes the voltage on the massive Bitline.
-*   The external circuitry cannot reliably tell if the capacitor was full (a '1') or empty (a '0')—the signal is too weak to be read directly.
+        <div class="footer-note">
+            Original article, please indicate the source when forwarding. Wowo Technology<br>
+            Tags: SDRAM dram
+        </div>
+    </div>
+</body>
+</html>
 
-### Problem 2: Reading Destroys the Data (The Leaky Bucket)
-
-When you open the gate to read the charge, the charge flows out and changes the state of the capacitor.
-
-*   **Reading a '1' (Full Bucket)**: The charge flows out to the Bitline, making the bucket less full.
-*   **Reading a '0' (Empty Bucket)**: The Bitline might push a little charge back in, making the bucket slightly less empty.
-
-This is called a **destructive read**. After you read the data, you can no longer be sure what the original data was!
-
-### Problem 3: The Forgetful Nature (The Leak)
-
-The capacitor is not perfect. Even when the gate is closed, the charge **leaks out** over time. This is why DRAM is "Dynamic"—it constantly needs to be refreshed (recharged) to keep the data alive.
-
----
-
-## Part 3: The Solution: The Differential Sense Amplifier (The Super-Ear and Refresher)
-
-To solve these problems, DRAM uses a clever piece of circuitry called the **Differential Sense Amplifier (DSA)**. Think of the DSA as a combination of a **super-sensitive ear** and a **powerful charge pump**.
-
-The DSA works by comparing the weak signal from the cell against a reference voltage (Vref, usually half the maximum voltage).
-
-### The Four Stages of a Read Operation
-
-The DSA manages the read process in four precise steps:
-
-#### 1. Precharge (Setting the Stage)
-
-*   The Bitline and a second, identical reference line (called the `/Bitline`) are both charged to the exact same **reference voltage (Vref)**. This creates a perfectly balanced starting point.
-
-#### 2. Access (The Whisper)
-
-*   The Wordline (the key) opens the Access Transistor (the gate).
-*   The tiny charge from the capacitor flows onto the Bitline.
-*   If the capacitor held a '1', the Bitline voltage rises slightly above Vref (Vref + tiny change).
-*   If the capacitor held a '0', the Bitline voltage drops slightly below Vref (Vref - tiny change).
-*   The DSA (the super-ear) is now ready to detect this tiny difference.
-
-#### 3. Sense (The Decision)
-
-*   The DSA is activated. It instantly compares the Bitline voltage to the `/Bitline` voltage.
-*   Because the DSA is so sensitive, it takes that tiny voltage difference and **amplifies it instantly** into a full, clear signal (either a full '1' or a full '0'). This is the moment the computer knows the data.
-
-#### 4. Restore (The Recharge)
-
-*   Since the read operation was destructive, the DSA now acts as a charge pump.
-*   It uses the full, clear signal it just generated to **force the correct, full charge back into the capacitor**.
-*   This step is crucial: it restores the capacitor to its original, full state, ensuring the data is not lost for the next read.
-
----
-
-## Part 4: Writing Data (Overwriting the Bucket)
-
-The write operation is very similar to the read operation, but with one extra step:
-
-1.  **Precharge, Access, Sense, Restore:** The process starts the same way to ensure the cell is in a known, stable state.
-2.  **Write Recovery:** The computer simply **overwrites** the cell. It forces the full voltage for a '1' or the empty voltage for a '0' onto the Bitline, and then opens the gate. The powerful external signal completely overrides the capacitor's current state, setting it to the new value.
-
-## Conclusion
-
-The DRAM storage cell is a marvel of engineering. It uses a simple, leaky capacitor to store data, but relies on a sophisticated **Differential Sense Amplifier** to overcome the physical limitations of weak signals and destructive reads.
-
-This constant process of reading, amplifying, and restoring charge is happening millions of times per second in your computer, allowing you to run complex applications and research topics like this one!
