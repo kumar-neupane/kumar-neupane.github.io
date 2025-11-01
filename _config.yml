@@ -1,0 +1,40 @@
+# Jekyll Configuration
+title: Kumar Neupane
+description: PhD candidate at Michigan Tech 
+author: Kumar Neupane
+email: kumarn@mtu.edu # <--- CHANGE THIS TO YOUR EMAIL
+url: https://kumar-neupane.github.io
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+
+# Pagination
+paginate: 10
+paginate_path: "/blog/page:num/"
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Kumar Neupane"
+
+# Exclude files
+exclude:
+  - .gitignore
+  - README.md
+  - Gemfile
+  - Gemfile.lock
