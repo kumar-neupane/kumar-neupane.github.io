@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+
+<link rel="stylesheet" href="{{ site.baseurl }}/css/bootstrap.css">
+<link rel="stylesheet" href="{{ site.baseurl }}/css/style.css">
+<link rel="stylesheet" href="{{ site.baseurl }}/css/component.css">
+<script src="{{ site.baseurl }}/js/modernizr.custom.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Lato:300italic,400italic,600italic,700italic,800italic,400,600,700,800,300' rel='stylesheet' type='text/css'>
+
+<!-- Global site tag (gtag.js ) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131953460-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag( ){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-131953460-1');
+</script>
+</head>
+
+<body>
+
+<!-- Import header -->
+{% include header.html %}
+
+<!-- Page content -->
+{{ content }}
+
+<!-- Import footer -->
+{% include footer.html %}
+
+<!--Javascript files start -->
+<script type="text/javascript" src="{{ site.baseurl }}/js/jquery.min.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/js/bootstrap.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/js/imagesloaded.pkgd.min.js"></script>
+
+</body>
+</html>
