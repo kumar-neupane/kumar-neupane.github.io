@@ -1,0 +1,38 @@
+---
+layout: post
+title: "Getting Started with Jekyll for Your Blog"
+date: 2024-11-01
+author: Kumar Neupane
+categories: [Jekyll, Blogging]
+tags: [jekyll, static-site, github-pages, tutorial]
+excerpt: "Learn how to set up Jekyll on your GitHub Pages site and start publishing blog posts with ease."
+---
+
+## Introduction
+
+Jekyll is a powerful static site generator that makes it easy to create and maintain a blog on GitHub Pages. In this post, we'll explore the basics of Jekyll and how to get started with your own blog.
+
+## What is Jekyll?
+
+Jekyll is a simple, blog-aware, static site generator. It takes your content written in Markdown and transforms it into a beautiful static website. The best part? GitHub Pages has built-in support for Jekyll, making it perfect for hosting your blog for free.
+
+## Key Features
+
+- **Markdown Support**: Write your posts in Markdown, a simple and readable format
+- **No Database Required**: Everything is stored as files, making it easy to version control
+- **Fast**: Static sites are incredibly fast and secure
+- **Free Hosting**: Host your blog for free on GitHub Pages
+
+## Getting Started
+
+To get started with Jekyll, you need to:
+
+1. **Install Jekyll**: Follow the [official installation guide](https://jekyllrb.com/docs/installation/ )
+2. **Create a new site**: Use the Jekyll command-line tool to scaffold a new site
+3. **Write content**: Create Markdown files in the `_posts` directory
+4. **Deploy**: Push your changes to GitHub and your site will be automatically built
+
+## Directory Structure
+
+A typical Jekyll site has the following structure:
+
