@@ -1,8 +1,17 @@
-window.onload = function(){
-  var includes = $('[data-include]');
-  jQuery.each(includes, function(){
-    var file = $(this).data('include') + '.html';
-    console.log(file)
-    $(this).load(file);
+document.addEventListener("DOMContentLoaded", function () {
+  const includes = document.querySelectorAll('[data-include]');
+  includes.forEach(el => {
+    const file = el.getAttribute('data-include') + '.html';
+    fetch(file)
+      .then(response => {
+        if (response.ok) return response.text();
+        throw new Error('Network response was not ok.');
+      })
+      .then(data => {
+        el.innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading file:', file, error);
+      });
   });
-}
+});
