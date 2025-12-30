@@ -205,7 +205,25 @@
     <main class="container radio-container">
         <div class="fade-in-up">
             <h1 style="text-align: center; margin-bottom: 1rem;">Nepali FM Stations</h1>
-            <p style="text-align: center; color: var(--text-secondary);">Select a station to start listening</p>
+
+            <!-- Search and Filter Controls -->
+            <div
+                style="max-width: 800px; margin: 0 auto 2rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                <input type="text" id="search-input" placeholder="Search stations..."
+                    style="padding: 0.8rem 1.2rem; border-radius: 30px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-primary); flex: 1; min-width: 200px; outline: none;">
+
+                <select id="province-filter"
+                    style="padding: 0.8rem 1.5rem; border-radius: 30px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-primary); outline: none; cursor: pointer;">
+                    <option value="all">All Provinces</option>
+                    <option value="1">Province 1 (Koshi)</option>
+                    <option value="2">Province 2 (Madhesh)</option>
+                    <option value="3">Province 3 (Bagmati)</option>
+                    <option value="4">Province 4 (Gandaki)</option>
+                    <option value="5">Province 5 (Lumbini)</option>
+                    <option value="6">Province 6 (Karnali)</option>
+                    <option value="7">Province 7 (Sudurpashchim)</option>
+                </select>
+            </div>
         </div>
 
         <div class="station-grid fade-in-up" id="station-grid">
@@ -244,78 +262,94 @@
 
     <script src="js/dynamic.js"></script>
     <script>
-        // Station Data
-        const stations = [
-            {
-                name: "Radio Nepal",
-                url: "https://stream1.radionepal.gov.np/live/?play",
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzgIkj8j9CkJV_pCmaFDsv3bpMfWdFgE4S5g&s",
-                freq: "100 MHz"
-            },
-            {
-                name: "Kantipur FM",
-                url: "https://radio-broadcast.ekantipur.com/stream",
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu4clGkf4E3n_LEL-vyTCOC_xSRcguZU5pCA&s",
-                freq: "96.1 MHz"
-            },
-            {
-                name: "Radio Sarangi",
-                url: "http://streaming.softnep.net:8037/;stream.nsv&type=mp3",
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ68DS0RdPmlU6ABkdW7thOFyDjyb6THALmX5g_Cr-iPjN-86v_-sUKDj8dmeg9WRjzpuo&usqp=CAU",
-                freq: "101.3 MHz"
-            },
-            {
-                name: "Ujyaalo 90 Network",
-                url: "https://stream-147.zeno.fm/wtuvp08xq1duv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ3dHV2cDA4eHExZHV2IiwiaG9zdCI6InN0cmVhbS0xNDcuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6ImZ2N09wVHhkUmItRncyX0h2bjlKVHciLCJpYXQiOjE3MzgzMzU5MjgsImV4cCI6MTczODMzNTk4OH0.hyY3k94h6F4RMkV1F_pEoVNu5EQI_aFQcGXRXK3RuYI",
-                img: "https://unncdn.prixacdn.net/static/frontend/img/logo.png",
-                freq: "90 MHz"
-            },
-            {
-                name: "Radio Vision",
-                url: "https://live.itech.host:3765/stream",
-                img: "https://images.hamro-files.com/iZMMi5Jpe0c2c_QIQ3hxEfb6Bls=/500x500/https://sgp1.digitaloceanspaces.com/everestdb/hamropatro-backend/radio/bd20e093-874b-4fa7-b75f-fdafc35dea07",
-                freq: "91.6 MHz"
-            }
-        ];
-
+        // DOM Elements
         const grid = document.getElementById('station-grid');
         const playerBar = document.getElementById('player-bar');
         const playerImg = document.getElementById('player-img');
         const playerName = document.getElementById('player-name');
+        const playerStatus = document.getElementById('player-status');
         const audioPlayer = document.getElementById('audio-player');
+        const searchInput = document.getElementById('search-input');
+        const provinceFilter = document.getElementById('province-filter');
 
-        // Render Stations
-        stations.forEach((station, index) => {
-            const card = document.createElement('div');
-            card.className = 'station-card';
-            card.innerHTML = `
-              <img src="${station.img}" alt="${station.name}" class="station-img">
-              <div class="station-name">${station.name}</div>
-              <div class="station-freq">${station.freq}</div>
-          `;
-            card.addEventListener('click', () => playStation(station, card));
-            grid.appendChild(card);
-        });
+        let allStations = [];
+
+        // Fetch Stations
+        fetch('js/stations.json')
+            .then(response => response.json())
+            .then(data => {
+                allStations = data.map(s => ({
+                    name: s.name,
+                    url: s.streamUrl,
+                    img: s.logo || 'https://cdn-icons-png.flaticon.com/512/2089/2089181.png',
+                    freq: s.frequency ? `${s.frequency} MHz` : 'Online',
+                    province: s.province,
+                    address: s.address
+                }));
+                renderStations(allStations);
+            })
+            .catch(err => {
+                console.error('Error loading stations:', err);
+                grid.innerHTML = '<p style="text-align:center; color:red;">Failed to load stations data.</p>';
+            });
+
+        function renderStations(stations) {
+            grid.innerHTML = '';
+            if (stations.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">No stations found matching your criteria.</p>';
+                return;
+            }
+
+            stations.forEach(station => {
+                const card = document.createElement('div');
+                card.className = 'station-card';
+
+                card.innerHTML = `
+                  <img src="${station.img}" alt="${station.name}" class="station-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2089/2089181.png'">
+                  <div class="station-name">${station.name}</div>
+                  <div class="station-freq">${station.freq}</div>
+                  ${station.address ? `<div style="font-size: 0.8rem; color: var(--text-secondary); margin-top:0.2rem;">${station.address}</div>` : ''}
+              `;
+                card.addEventListener('click', () => playStation(station, card));
+                grid.appendChild(card);
+            });
+        }
 
         function playStation(station, card) {
-            // Update active state
             document.querySelectorAll('.station-card').forEach(c => c.classList.remove('playing'));
             card.classList.add('playing');
 
-            // Show Player
             playerBar.style.display = 'flex';
 
-            // Update Info
             playerImg.src = station.img;
-            playerName.textContent = station.name;
+            playerImg.onerror = function () { this.src = 'https://cdn-icons-png.flaticon.com/512/2089/2089181.png'; };
 
-            // Play Audio
+            playerName.textContent = station.name;
+            playerStatus.textContent = `Playing ${station.freq}`;
+
             audioPlayer.src = station.url;
-            audioPlayer.play().catch(e => console.log("Playback error:", e));
+            audioPlayer.play().catch(e => {
+                console.log("Playback error:", e);
+                // alert("Unable to play this station. It might be offline.");
+            });
         }
 
-        // Theme Toggle Logic reused from dynamic.js/modern.css context if needed
-        // (Already handled by dynamic.js loaded below)
+        // Filter Logic
+        function filterStations() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedProvince = provinceFilter.value;
+
+            const filtered = allStations.filter(station => {
+                const matchesSearch = station.name.toLowerCase().includes(searchTerm) || (station.address && station.address.toLowerCase().includes(searchTerm));
+                const matchesProvince = selectedProvince === 'all' || (station.province && station.province.toString() === selectedProvince);
+                return matchesSearch && matchesProvince;
+            });
+
+            renderStations(filtered);
+        }
+
+        if (searchInput) searchInput.addEventListener('input', filterStations);
+        if (provinceFilter) provinceFilter.addEventListener('change', filterStations);
     </script>
 
 </body>
