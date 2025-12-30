@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali FM - Kumar Neupane</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Listen to live Nepali FM stations including Radio Nepal, Kantipur FM, and more on Kumar Neupane's portfolio.">
+    <meta name="keywords"
+        content="Nepali FM, Radio Nepal, Kantipur FM, Live Radio, Nepal Radio Stations, Kumar Neupane">
+    <meta name="author" content="Kumar Neupane">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Nepali FM - Kumar Neupane">
+    <meta property="og:description" content="Listen to live Nepali FM stations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kumar-neupane.github.io/radio.html">
+    <meta property="og:image" content="https://kumar-neupane.github.io/images/latest/kumar-neupane.jpg">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/modern.css">
+
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+
+    <style>
+        /* Radio Page Specific CSS */
+        .radio-container {
+            padding: 2rem 0;
+            margin-bottom: 5rem;
+            /* Space for fixed player */
+        }
+
+        .station-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .station-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .station-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        .station-card.playing {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
+        }
+
+        .station-img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            /* OR cover? try cover for circular look if wanted */
+            border-radius: 50%;
+            background: #fff;
+            padding: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .station-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .station-freq {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bg-primary);
+            /* Fallback */
+            background: rgba(10, 10, 20, 0.95);
+            /* Dark semi-transparent */
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 1000;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] .player-bar {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 200px;
+        }
+
+        .player-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .player-text h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .player-text p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        audio {
+            width: 100%;
+            max-width: 500px;
+            height: 40px;
+        }
+
+        /* Override audio element colors if possible, typically hard */
+        audio::-webkit-media-controls-panel {
+            background-color: #f1f3f4;
+        }
+
+        @media (max-width: 768px) {
+            .player-bar {
+                flex-direction: column;
+                gap: 1rem;
+                padding-bottom: 1.5rem;
+                /* Safe area */
+            }
+
+            .player-info {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                Kumar Neupane
+            </a>
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="publications.html">Publications</a></li>
+                    <li><a href="achievement-and-participations.html">Achievements</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container radio-container">
+        <div class="fade-in-up">
+            <h1 style="text-align: center; margin-bottom: 1rem;">Nepali FM Stations</h1>
+            <p style="text-align: center; color: var(--text-secondary);">Select a station to start listening</p>
+        </div>
+
+        <div class="station-grid fade-in-up" id="station-grid">
+            <!-- Stations injected via JS -->
+        </div>
+    </main>
+
+    <!-- Player Bar -->
+    <div class="player-bar" id="player-bar" style="display: none;">
+        <div class="player-info">
+            <img src="" alt="Station Logo" id="player-img">
+            <div class="player-text">
+                <h4 id="player-name">Select a Station</h4>
+                <p id="player-status">Playing Live</p>
+            </div>
+        </div>
+        <audio id="audio-player" controls>
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <!-- Footer -->
+    <footer
+        style="text-align: center; padding: 1rem 0; color: var(--text-secondary); margin-bottom: 80px; border-top: 1px solid var(--glass-border);">
+        <div class="container">
+            <p style="margin: 0;">
+                &copy; 2025 Kumar Neupane. All rights reserved. |
+                <a href="calendar-widget.html" target="_blank" style="color: var(--accent-color);"><span
+                        style="font-size: 1.5em; vertical-align: middle; margin-right: 2px;">🇳🇵</span> Nepali
+                    Calendar</a> |
+                <a href="radio.html" class="active" style="color: var(--accent-color); font-weight: bold;"><span
+                        style="font-size: 1.5em; vertical-align: middle; margin-right: 2px;">📻</span> Nepali FM</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/dynamic.js"></script>
+    <script>
+        // Station Data
+        const stations = [
+            {
+                name: "Radio Nepal",
+                url: "https://stream1.radionepal.gov.np/live/?play",
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzgIkj8j9CkJV_pCmaFDsv3bpMfWdFgE4S5g&s",
+                freq: "100 MHz"
+            },
+            {
+                name: "Kantipur FM",
+                url: "https://radio-broadcast.ekantipur.com/stream",
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu4clGkf4E3n_LEL-vyTCOC_xSRcguZU5pCA&s",
+                freq: "96.1 MHz"
+            },
+            {
+                name: "Radio Sarangi",
+                url: "http://streaming.softnep.net:8037/;stream.nsv&type=mp3",
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ68DS0RdPmlU6ABkdW7thOFyDjyb6THALmX5g_Cr-iPjN-86v_-sUKDj8dmeg9WRjzpuo&usqp=CAU",
+                freq: "101.3 MHz"
+            },
+            {
+                name: "Ujyaalo 90 Network",
+                url: "https://stream-147.zeno.fm/wtuvp08xq1duv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ3dHV2cDA4eHExZHV2IiwiaG9zdCI6InN0cmVhbS0xNDcuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6ImZ2N09wVHhkUmItRncyX0h2bjlKVHciLCJpYXQiOjE3MzgzMzU5MjgsImV4cCI6MTczODMzNTk4OH0.hyY3k94h6F4RMkV1F_pEoVNu5EQI_aFQcGXRXK3RuYI",
+                img: "https://unncdn.prixacdn.net/static/frontend/img/logo.png",
+                freq: "90 MHz"
+            },
+            {
+                name: "Radio Vision",
+                url: "https://live.itech.host:3765/stream",
+                img: "https://images.hamro-files.com/iZMMi5Jpe0c2c_QIQ3hxEfb6Bls=/500x500/https://sgp1.digitaloceanspaces.com/everestdb/hamropatro-backend/radio/bd20e093-874b-4fa7-b75f-fdafc35dea07",
+                freq: "91.6 MHz"
+            }
+        ];
+
+        const grid = document.getElementById('station-grid');
+        const playerBar = document.getElementById('player-bar');
+        const playerImg = document.getElementById('player-img');
+        const playerName = document.getElementById('player-name');
+        const audioPlayer = document.getElementById('audio-player');
+
+        // Render Stations
+        stations.forEach((station, index) => {
+            const card = document.createElement('div');
+            card.className = 'station-card';
+            card.innerHTML = `
+              <img src="${station.img}" alt="${station.name}" class="station-img">
+              <div class="station-name">${station.name}</div>
+              <div class="station-freq">${station.freq}</div>
+          `;
+            card.addEventListener('click', () => playStation(station, card));
+            grid.appendChild(card);
+        });
+
+        function playStation(station, card) {
+            // Update active state
+            document.querySelectorAll('.station-card').forEach(c => c.classList.remove('playing'));
+            card.classList.add('playing');
+
+            // Show Player
+            playerBar.style.display = 'flex';
+
+            // Update Info
+            playerImg.src = station.img;
+            playerName.textContent = station.name;
+
+            // Play Audio
+            audioPlayer.src = station.url;
+            audioPlayer.play().catch(e => console.log("Playback error:", e));
+        }
+
+        // Theme Toggle Logic reused from dynamic.js/modern.css context if needed
+        // (Already handled by dynamic.js loaded below)
+    </script>
+
+</body>
+
+</html>
