@@ -1,7 +1,6 @@
-# *
+# Robots.txt for kumar-neupane.github.io
 User-agent: *
 Allow: /
-# Host
-Host: https://suresh-pokharel.github.io/
-# Sitemaps
-Sitemap: https://suresh-pokharel.github.io/sitemap.xml
+
+# Sitemap location
+Sitemap: https://kumar-neupane.github.io/sitemap.xml

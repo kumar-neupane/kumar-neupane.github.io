@@ -4,25 +4,40 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
 
 <url>
-  <loc>https://suresh-pokharel.github.io/</loc>
-  <lastmod>2023-03-10T18:22:45+00:00</lastmod>
+  <loc>https://kumar-neupane.github.io/</loc>
+  <lastmod>2025-12-30</lastmod>
+  <changefreq>monthly</changefreq>
   <priority>1.00</priority>
 </url>
 
 <url>
-  <loc>https://suresh-pokharel.github.io/publications.html</loc>
-  <lastmod>2023-03-10T18:22:45+00:00</lastmod>
-  <priority>0.50</priority>
+  <loc>https://kumar-neupane.github.io/publications.html</loc>
+  <lastmod>2025-12-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.80</priority>
+</url>
+
+<url>
+  <loc>https://kumar-neupane.github.io/projects.html</loc>
+  <lastmod>2025-12-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.70</priority>
 </url>
       
 <url>
-  <loc>https://suresh-pokharel.github.io/achievement-and-participations.html</loc>
-  <lastmod>2023-03-10T18:22:45+00:00</lastmod>
-  <priority>0.50</priority>
+  <loc>https://kumar-neupane.github.io/achievement-and-participations.html</loc>
+  <lastmod>2025-12-30</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.60</priority>
+</url>
+
+<url>
+  <loc>https://kumar-neupane.github.io/blog.html</loc>
+  <lastmod>2025-12-30</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.70</priority>
 </url>
 
 </urlset>
