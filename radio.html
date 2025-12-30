@@ -8,21 +8,21 @@
 
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="Listen to live Nepali FM stations including Radio Nepal, Kantipur FM, and more on Kumar Neupane's portfolio.">
+        content="Listen to live Nepali FM stations including Radio Nepal, Kantipur FM, and more. Features 200+ stations, smart search, and favorites.">
     <meta name="keywords"
         content="Nepali FM, Radio Nepal, Kantipur FM, Live Radio, Nepal Radio Stations, Kumar Neupane">
     <meta name="author" content="Kumar Neupane">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Nepali FM - Kumar Neupane">
-    <meta property="og:description" content="Listen to live Nepali FM stations.">
+    <meta property="og:description" content="Listen to live Nepali FM stations with a premium experience.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kumar-neupane.github.io/radio.html">
     <meta property="og:image" content="https://kumar-neupane.github.io/images/latest/kumar-neupane.jpg">
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/modern.css">
 
     <script>
@@ -35,142 +35,444 @@
     </script>
 
     <style>
-        /* Radio Page Specific CSS */
-        .radio-container {
-            padding: 2rem 0;
-            margin-bottom: 5rem;
-            /* Space for fixed player */
+        :root {
+            --glass-bg: rgba(18, 25, 40, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --card-hover-bg: rgba(255, 255, 255, 0.05);
+            --neon-glow: 0 0 10px rgba(56, 189, 248, 0.5);
+            --text-muted: #94a3b8;
         }
 
+        [data-theme="light"] {
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(0, 0, 0, 0.05);
+            --card-hover-bg: rgba(0, 0, 0, 0.02);
+            --neon-glow: 0 0 10px rgba(2, 132, 199, 0.3);
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            /* More modern font */
+            background-image: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* Radio Page Specific CSS */
+        .radio-container {
+            padding: 3rem 0;
+            padding-bottom: 8rem;
+            /* Space for fixed player */
+            min-height: 100vh;
+        }
+
+        .controls-wrapper {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* Search Input */
+        .search-box {
+            flex: 1;
+            position: relative;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: var(--neon-glow);
+        }
+
+        /* Select Dropdown */
+        .filter-select {
+            padding: 1rem 2rem 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+            transition: all 0.3s ease;
+            min-width: 180px;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        /* Favorites Toggle */
+        .fav-toggle-btn {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .fav-toggle-btn.active {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            /* Red for heart */
+            border-color: rgba(239, 68, 68, 0.3);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+        }
+
+        .fav-toggle-btn:hover {
+            background: var(--card-hover-bg);
+        }
+
+
+        /* Station Grid */
         .station-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .station-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1.5rem;
+            border-radius: 16px;
+            padding: 1.5rem 1rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1rem;
+            height: 100%;
+        }
+
+        .station-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), #a855f7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .station-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            border-color: var(--accent-color);
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            /* Slight lighten */
+        }
+
+        .station-card:hover::before {
+            opacity: 1;
         }
 
         .station-card.playing {
             border-color: var(--accent-color);
-            box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .station-card.playing .station-img {
+            animation: pulse 2s infinite;
+        }
+
+        /* Heart Icon on Card */
+        .card-fav-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 2;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .station-card:hover .card-fav-btn,
+        .card-fav-btn.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card-fav-btn.active {
+            color: #ef4444;
+        }
+
+        .card-fav-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .station-img-wrapper {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 1rem;
+            position: relative;
         }
 
         .station-img {
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
-            /* OR cover? try cover for circular look if wanted */
             border-radius: 50%;
             background: #fff;
-            padding: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 4px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
 
         .station-name {
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1.05rem;
             color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 2.6em;
+            /* Fixed height for consistency */
+        }
+
+        .station-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
         }
 
         .station-freq {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2px 8px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 99px;
+            padding: 2px 10px;
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            display: inline-block;
         }
 
+        .station-location {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Player Bar - Premium Design */
         .player-bar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: var(--bg-primary);
-            /* Fallback */
-            background: rgba(10, 10, 20, 0.95);
-            /* Dark semi-transparent */
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--glass-border);
-            padding: 1rem;
-            display: flex;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            /* Start hidden */
+            width: 90%;
+            max-width: 1000px;
+            background: rgba(15, 23, 42, 0.95);
+            /* Deep dark blue */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 1rem 2rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
             align-items: center;
-            justify-content: center;
             gap: 2rem;
             z-index: 1000;
-            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         [data-theme="light"] .player-bar {
             background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .player-bar.visible {
+            transform: translateX(-50%) translateY(0);
         }
 
         .player-info {
             display: flex;
             align-items: center;
             gap: 1rem;
-            min-width: 200px;
         }
 
-        .player-info img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
+        .player-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #fff;
+            padding: 2px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .player-text h4 {
             margin: 0;
             font-size: 1rem;
             color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
         }
 
         .player-text p {
             margin: 0;
             font-size: 0.8rem;
-            color: var(--text-secondary);
+            color: var(--accent-color);
+        }
+
+        /* Audio Player Styling */
+        .player-controls {
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         audio {
             width: 100%;
-            max-width: 500px;
             height: 40px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
 
-        /* Override audio element colors if possible, typically hard */
-        audio::-webkit-media-controls-panel {
-            background-color: #f1f3f4;
+        audio::-webkit-media-controls-enclosure {
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Subtle transparent */
+        }
+
+        [data-theme="light"] audio::-webkit-media-controls-enclosure {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .player-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .player-close:hover {
+            color: #ef4444;
+        }
+
+        /* Loading & Error States */
+        .loading-spinner {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-muted);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(56, 189, 248, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
-            .player-bar {
+            .controls-wrapper {
                 flex-direction: column;
+                align-items: stretch;
+            }
+
+            .player-bar {
+                width: 95%;
+                bottom: 15px;
+                grid-template-columns: 1fr auto;
+                grid-template-rows: auto auto;
+                padding: 1rem;
                 gap: 1rem;
-                padding-bottom: 1.5rem;
-                /* Safe area */
             }
 
             .player-info {
-                width: 100%;
-                justify-content: center;
+                grid-column: 1 / 2;
+            }
+
+            .player-close {
+                grid-column: 2 / 3;
+                justify-self: end;
+            }
+
+            .player-controls {
+                grid-column: 1 / -1;
             }
         }
     </style>
@@ -178,7 +480,7 @@
 
 <body>
 
-    <!-- Header -->
+    <!-- Header (Same as Index) -->
     <header class="navbar">
         <div class="container nav-content">
             <a href="index.html" class="logo">
@@ -203,18 +505,25 @@
 
     <!-- Main Content -->
     <main class="container radio-container">
-        <div class="fade-in-up">
-            <h1 style="text-align: center; margin-bottom: 1rem;">Nepali FM Stations</h1>
+        <div class="fade-in-up visible">
+            <h1
+                style="text-align: center; margin-bottom: 0.5rem; margin-top: 1rem; font-size: 2.5rem; letter-spacing: -1px;">
+                <span style="color: var(--accent-color);">Nepali</span> FM
+            </h1>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
+                Live streaming 200+ radio stations from across Nepal
+            </p>
 
             <!-- Search and Filter Controls -->
-            <div
-                style="max-width: 800px; margin: 0 auto 2rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-                <input type="text" id="search-input" placeholder="Search stations..."
-                    style="padding: 0.8rem 1.2rem; border-radius: 30px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-primary); flex: 1; min-width: 200px; outline: none;">
+            <div class="controls-wrapper">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Find a station or place...">
+                </div>
 
-                <select id="province-filter"
-                    style="padding: 0.8rem 1.5rem; border-radius: 30px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-primary); outline: none; cursor: pointer;">
+                <select id="province-filter" class="filter-select">
                     <option value="all">All Provinces</option>
+                    <option value="favorites">❤ Favorites Only</option>
                     <option value="1">Province 1 (Koshi)</option>
                     <option value="2">Province 2 (Madhesh)</option>
                     <option value="3">Province 3 (Bagmati)</option>
@@ -223,31 +532,44 @@
                     <option value="6">Province 6 (Karnali)</option>
                     <option value="7">Province 7 (Sudurpashchim)</option>
                 </select>
+
+                <button id="fav-filter-btn" class="fav-toggle-btn" title="Show Favorites">
+                    <i class="fas fa-heart"></i> Favorites
+                </button>
             </div>
         </div>
 
-        <div class="station-grid fade-in-up" id="station-grid">
-            <!-- Stations injected via JS -->
+        <div class="station-grid" id="station-grid">
+            <div class="loading-spinner">
+                <i class="fas fa-circle-notch fa-spin fa-3x"></i>
+                <p style="margin-top: 1rem;">Tuning in...</p>
+            </div>
         </div>
     </main>
 
-    <!-- Player Bar -->
-    <div class="player-bar" id="player-bar" style="display: none;">
+    <!-- Premium Player Bar -->
+    <div class="player-bar" id="player-bar">
         <div class="player-info">
-            <img src="" alt="Station Logo" id="player-img">
+            <img src="https://cdn-icons-png.flaticon.com/512/2089/2089181.png" alt="Station Logo" id="player-img"
+                class="player-img">
             <div class="player-text">
                 <h4 id="player-name">Select a Station</h4>
-                <p id="player-status">Playing Live</p>
+                <p id="player-status"><i class="fas fa-broadcast-tower"></i> Live</p>
             </div>
         </div>
-        <audio id="audio-player" controls>
-            Your browser does not support the audio element.
-        </audio>
+        <div class="player-controls">
+            <audio id="audio-player" controls controlsList="nodownload">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <button class="player-close" id="player-close" title="Close Player">
+            <i class="fas fa-times"></i>
+        </button>
     </div>
 
     <!-- Footer -->
     <footer
-        style="text-align: center; padding: 1rem 0; color: var(--text-secondary); margin-bottom: 80px; border-top: 1px solid var(--glass-border);">
+        style="text-align: center; padding: 1rem 0; color: var(--text-secondary); border-top: 1px solid var(--glass-border); margin-top: auto;">
         <div class="container">
             <p style="margin: 0;">
                 &copy; 2025 Kumar Neupane. All rights reserved. |
@@ -271,14 +593,19 @@
         const audioPlayer = document.getElementById('audio-player');
         const searchInput = document.getElementById('search-input');
         const provinceFilter = document.getElementById('province-filter');
+        const favFilterBtn = document.getElementById('fav-filter-btn');
+        const playerClose = document.getElementById('player-close');
 
         let allStations = [];
+        let favorites = JSON.parse(localStorage.getItem('nepaliFMFavorites')) || [];
+        let showFavoritesOnly = false;
 
-        // Fetch Stations
+        // Initialize
         fetch('js/stations.json')
             .then(response => response.json())
             .then(data => {
                 allStations = data.map(s => ({
+                    id: s.id || Math.random().toString(36).substr(2, 9), // Ensure ID exists
                     name: s.name,
                     url: s.streamUrl,
                     img: s.logo || 'https://cdn-icons-png.flaticon.com/512/2089/2089181.png',
@@ -290,68 +617,195 @@
             })
             .catch(err => {
                 console.error('Error loading stations:', err);
-                grid.innerHTML = '<p style="text-align:center; color:red;">Failed to load stations data.</p>';
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; color: #ef4444; padding: 2rem;">
+                        <i class="fas fa-exclamation-triangle fa-2x"></i>
+                        <p style="margin-top: 1rem;">Failed to load station data. Please try again later.</p>
+                    </div>`;
             });
 
+        // Render Stations
         function renderStations(stations) {
             grid.innerHTML = '';
+
             if (stations.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">No stations found matching your criteria.</p>';
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 4rem;">
+                        <i class="fas fa-ghost fa-3x" style="opacity: 0.5; margin-bottom: 1rem;"></i>
+                        <p>No stations found matching your criteria.</p>
+                        ${showFavoritesOnly ? '<button onclick="toggleFavoritesFilter()" style="margin-top:1rem; color:var(--accent-color); background:none; border:1px solid var(--accent-color); padding:0.5rem 1rem; border-radius:20px; cursor:pointer;">Show All Stations</button>' : ''}
+                    </div>`;
                 return;
             }
 
             stations.forEach(station => {
+                const isFav = favorites.includes(station.id);
                 const card = document.createElement('div');
                 card.className = 'station-card';
+                card.setAttribute('data-id', station.id);
 
                 card.innerHTML = `
-                  <img src="${station.img}" alt="${station.name}" class="station-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2089/2089181.png'">
-                  <div class="station-name">${station.name}</div>
-                  <div class="station-freq">${station.freq}</div>
-                  ${station.address ? `<div style="font-size: 0.8rem; color: var(--text-secondary); margin-top:0.2rem;">${station.address}</div>` : ''}
-              `;
-                card.addEventListener('click', () => playStation(station, card));
+                    <button class="card-fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(event, '${station.id}')" title="${isFav ? 'Remove from Favorites' : 'Add to Favorites'}">
+                        <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
+                    </button>
+                    <div class="station-img-wrapper">
+                        <img src="${station.img}" alt="${station.name}" class="station-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2089/2089181.png'">
+                    </div>
+                    <div class="station-name" title="${station.name}">${station.name}</div>
+                    <div class="station-meta">
+                        <div><span class="station-freq">${station.freq}</span></div>
+                        ${station.address ? `<div class="station-location"><i class="fas fa-map-marker-alt" style="font-size:0.7em;"></i> ${station.address.split(',')[0]}</div>` : ''}
+                    </div>
+                `;
+
+                // Add click event for playing, avoiding the heart button
+                card.addEventListener('click', (e) => {
+                    if (!e.target.closest('.card-fav-btn')) {
+                        playStation(station, card);
+                    }
+                });
+
                 grid.appendChild(card);
             });
         }
 
+        // Favorites Logic
+        window.toggleFavorite = function (e, id) {
+            e.stopPropagation(); // Prevent card click
+            const index = favorites.indexOf(id);
+            const btn = e.currentTarget;
+            const icon = btn.querySelector('i');
+
+            if (index === -1) {
+                favorites.push(id);
+                btn.classList.add('active');
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+            } else {
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+
+                // If in favorites view, verify if we should remove the card immediately
+                if (showFavoritesOnly) {
+                    filterStations();
+                }
+            }
+            localStorage.setItem('nepaliFMFavorites', JSON.stringify(favorites));
+        };
+
+        // Filter Logic
+        function filterStations() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const provinceVal = provinceFilter.value;
+
+            // Handle "Favorites Only" from select or toggle
+            if (provinceVal === 'favorites') {
+                showFavoritesOnly = true;
+                favFilterBtn.classList.add('active');
+            } else if (provinceVal !== 'favorites' && provinceVal !== 'all') {
+                showFavoritesOnly = false;
+                favFilterBtn.classList.remove('active');
+            }
+
+            let filtered = allStations.filter(station => {
+                const matchesSearch = station.name.toLowerCase().includes(searchTerm) ||
+                    (station.address && station.address.toLowerCase().includes(searchTerm));
+
+                let matchesProvince = true;
+                if (!showFavoritesOnly) {
+                    matchesProvince = provinceVal === 'all' ||
+                        (station.province && station.province.toString() === provinceVal);
+                }
+
+                const matchesFav = showFavoritesOnly ? favorites.includes(station.id) : true;
+
+                return matchesSearch && matchesProvince && matchesFav;
+            });
+
+            // Special sorting: Favorites first when searching/browsing all
+            if (!showFavoritesOnly && searchTerm.length === 0 && provinceVal === 'all') {
+                filtered.sort((a, b) => {
+                    const aFav = favorites.includes(a.id);
+                    const bFav = favorites.includes(b.id);
+                    if (aFav && !bFav) return -1;
+                    if (!aFav && bFav) return 1;
+                    return 0; // Keep original order
+                });
+            }
+
+            renderStations(filtered);
+        }
+
+        // Toggle Favorites Filter Button
+        favFilterBtn.addEventListener('click', toggleFavoritesFilter);
+
+        function toggleFavoritesFilter() {
+            showFavoritesOnly = !showFavoritesOnly;
+            favFilterBtn.classList.toggle('active', showFavoritesOnly);
+
+            // Sync select dropdown
+            if (showFavoritesOnly) {
+                provinceFilter.value = 'favorites';
+            } else {
+                provinceFilter.value = 'all';
+            }
+
+            filterStations();
+        }
+
+        // Player Logic
         function playStation(station, card) {
+            // Update UI
             document.querySelectorAll('.station-card').forEach(c => c.classList.remove('playing'));
             card.classList.add('playing');
 
-            playerBar.style.display = 'flex';
+            playerBar.classList.add('visible');
 
             playerImg.src = station.img;
             playerImg.onerror = function () { this.src = 'https://cdn-icons-png.flaticon.com/512/2089/2089181.png'; };
 
             playerName.textContent = station.name;
-            playerStatus.textContent = `Playing ${station.freq}`;
+            playerStatus.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Connecting...`; // Loading state
 
             audioPlayer.src = station.url;
-            audioPlayer.play().catch(e => {
-                console.log("Playback error:", e);
-                // alert("Unable to play this station. It might be offline.");
-            });
+
+            const playPromise = audioPlayer.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    playerStatus.innerHTML = `<i class="fas fa-broadcast-tower" style="color:var(--accent-color)"></i> Live &bull; ${station.freq}`;
+                })
+                    .catch(error => {
+                        console.log("Playback error:", error);
+                        playerStatus.innerHTML = `<span style="color: #ef4444;"><i class="fas fa-exclamation-circle"></i> Connection Failed (Mixed Content?)</span>`;
+                    });
+            }
         }
 
-        // Filter Logic
-        function filterStations() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const selectedProvince = provinceFilter.value;
+        // Close Player
+        playerClose.addEventListener('click', () => {
+            playerBar.classList.remove('visible');
+            audioPlayer.pause();
+            audioPlayer.src = "";
+            document.querySelectorAll('.station-card').forEach(c => c.classList.remove('playing'));
+        });
 
-            const filtered = allStations.filter(station => {
-                const matchesSearch = station.name.toLowerCase().includes(searchTerm) || (station.address && station.address.toLowerCase().includes(searchTerm));
-                const matchesProvince = selectedProvince === 'all' || (station.province && station.province.toString() === selectedProvince);
-                return matchesSearch && matchesProvince;
-            });
+        // Event Listeners
+        searchInput.addEventListener('input', filterStations);
+        provinceFilter.addEventListener('change', (e) => {
+            if (e.target.value === 'favorites') {
+                showFavoritesOnly = true;
+                favFilterBtn.classList.add('active');
+            } else {
+                showFavoritesOnly = false;
+                favFilterBtn.classList.remove('active');
+            }
+            filterStations();
+        });
 
-            renderStations(filtered);
-        }
-
-        if (searchInput) searchInput.addEventListener('input', filterStations);
-        if (provinceFilter) provinceFilter.addEventListener('change', filterStations);
     </script>
-
 </body>
 
 </html>
