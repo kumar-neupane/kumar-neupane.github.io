@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali FM - Player</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #38bdf8;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .station-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: contain;
+            background: #fff;
+            padding: 5px;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .station-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .status {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        audio {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .timer-display {
+            font-size: 0.9rem;
+            color: #ef4444;
+            display: none;
+            margin-top: 0.5rem;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(56, 189, 248, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img id="p-img" src="" class="station-img" alt="Logo">
+    <div id="p-name" class="station-name">Loading...</div>
+    <div id="p-status" class="status">Connecting...</div>
+
+    <audio id="p-audio" controls autoplay>
+        Your browser does not support audio.
+    </audio>
+
+    <div id="timer-ui" class="timer-display"><i class="fas fa-clock"></i> <span id="time-left"></span></div>
+
+    <button class="close-btn" onclick="window.close()">Close Player</button>
+
+    <script>
+        // Get params from URL
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name');
+        const url = params.get('url');
+        const img = params.get('img');
+        const timer = params.get('timer'); // minutes
+
+        document.getElementById('p-name').textContent = name;
+        document.getElementById('p-img').src = img || 'https://cdn-icons-png.flaticon.com/512/2089/2089181.png';
+        const audio = document.getElementById('p-audio');
+
+        if (url) {
+            audio.src = url;
+            audio.play().then(() => {
+                document.getElementById('p-status').innerHTML = '<span style="color:#22c55e">● Live Broadcast</span>';
+            }).catch(e => {
+                document.getElementById('p-status').innerHTML = '<span style="color:#ef4444">Connection Failed</span>';
+            });
+        }
+
+        // Timer Logic
+        if (timer) {
+            const timerDisplay = document.getElementById('timer-ui');
+            const timeLeftSpan = document.getElementById('time-left');
+            timerDisplay.style.display = 'block';
+
+            let timeLeft = parseInt(timer) * 60; // seconds
+
+            const interval = setInterval(() => {
+                timeLeft--;
+                const m = Math.floor(timeLeft / 60);
+                const s = timeLeft % 60;
+                timeLeftSpan.textContent = `Stopping in ${m}:${s < 10 ? '0' : ''}${s}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    audio.pause();
+                    document.getElementById('p-status').textContent = 'Sleep Timer Ended';
+                    setTimeout(() => window.close(), 2000);
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
