@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Theme Toggle Logic
     const themeBtn = document.getElementById('theme-toggle');
-    const body = document.body;
+    const html = document.documentElement;
     const icon = themeBtn ? themeBtn.querySelector('i') : null;
 
-    // Check local storage
+    // Check local storage (handled by head script now, but keep sync)
     const currentTheme = localStorage.getItem('theme');
     if (currentTheme) {
-        body.setAttribute('data-theme', currentTheme);
+        html.setAttribute('data-theme', currentTheme);
         if (currentTheme === 'light' && icon) {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
@@ -16,18 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
-            const isLight = body.getAttribute('data-theme') === 'light';
+            const isLight = html.getAttribute('data-theme') === 'light';
 
             if (isLight) {
-                body.removeAttribute('data-theme');
+                html.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'dark');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
+                if (icon) {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
             } else {
-                body.setAttribute('data-theme', 'light');
+                html.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
             }
         });
     }
