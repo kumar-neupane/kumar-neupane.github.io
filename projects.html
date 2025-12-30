@@ -1,65 +1,65 @@
-<!doctype html>
-<html>
-   <head>
-      <meta charset="utf-8">
-      <title>Suresh Pokharel</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!-- <link rel="icon" type="image/png" href="images/logo.png"> -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="css/bootstrap.css">
-      <link rel="stylesheet" href="css/style.css">
-      <link rel="stylesheet" href="css/component.css">
-      <script src="js/modernizr.custom.js"></script>
-      <link href='https://fonts.googleapis.com/css?family=Lato:300italic,400italic,600italic,700italic,800italic,400,600,700,800,300' rel='stylesheet' type='text/css'>
-      <script src="js/loader_htmls.js"></script>
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131953460-1"></script>
-      <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
-         gtag('config', 'UA-131953460-1');
-      </script>
-   </head>
-   <body>
-      <!-- Import header -->
-      <div data-include="header"></div>
-      <div class="container">
-         <div class="row content publications" style="padding-left: 0;">
-            <h3 class="contactTitle text-xs-center">Projects</h3>
-            <ul>
-               <p>
-               <li>
-                 Scale-invariant feature transform (SIFT) analysis of super-resolution images to assess the quality of images synthetically generated using a generative adversarial network (GAN). <span class="paper-type-journal">master’s thesis</span><a href="http://dx.doi.org/10.13140/RG.2.2.24998.40000" target="_blank"><span class="paper-type-workshop">Read full document</span></a>
-               </li>
-               </p>
-               <p>
-                  <li>
-               Fingerprint-Spoof-Detector-Based-on-LBP-and-HOG<a href="https://github.com/suresh-pokharel/Fingerprint-Spoof-Detector-Based-on-LBP-and-HOG" target="_blank" title = "GitHub"><span class="paper-type-journal conference"><i class="fa fa-github"></i></span></a>
-                     </li>
-               </p>
-             
-            </ul>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Projects - Kumar Neupane</title>
+   <!-- Fonts -->
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <!-- Modern Styles -->
+   <link rel="stylesheet" href="css/modern.css">
+</head>
+
+<body>
+
+   <!-- Header -->
+   <div data-include="header"></div>
+
+   <!-- Projects Section -->
+   <section class="container" style="padding-top: 120px;">
+      <h2 style="text-align: center; margin-bottom: 3rem;" class="fade-in-up">Projects</h2>
+
+      <div class="about-grid">
+         <!-- Project 1 -->
+         <div class="glass-card fade-in-up">
+            <h3>SIFT Analysis of Super-Resolution Images</h3>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">
+               Scale-invariant feature transform (SIFT) analysis to assess the quality of images generated using GANs.
+            </p>
+            <div style="margin-top: 1.5rem;">
+               <span
+                  style="font-size: 0.8rem; padding: 0.2rem 0.6rem; border: 1px solid var(--accent-color); border-radius: 20px; color: var(--accent-color);">Master's
+                  Thesis</span>
+               <a href="http://dx.doi.org/10.13140/RG.2.2.24998.40000" target="_blank"
+                  style="display: block; margin-top: 1rem; font-weight: 600;">Read Full Document <i
+                     class="fas fa-arrow-right" style="font-size: 0.8rem;"></i></a>
+            </div>
+         </div>
+
+         <!-- Project 2 -->
+         <div class="glass-card fade-in-up" style="animation-delay: 0.1s;">
+            <h3>Fingerprint Spoof Detector</h3>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">
+               Based on Local Binary Patterns (LBP) and Histogram of Oriented Gradients (HOG).
+            </p>
+            <div style="margin-top: 1.5rem;">
+               <!-- Note: This link was pointing to 'suresh-pokharel' repo, kept as is from source but updated icon -->
+               <a href="https://github.com/suresh-pokharel/Fingerprint-Spoof-Detector-Based-on-LBP-and-HOG"
+                  target="_blank" style="font-size: 1.5rem; color: var(--text-primary);"><i class="fab fa-github"></i>
+                  View Code</a>
+            </div>
          </div>
       </div>
-      <hr>
-      <!-- Import footer -->
-      <div data-include="footer"></div>
-      <!--Javascriptfile start -->
-      <script type="text/javascript" src="js/jquery.min.js"></script>
-      <script type="text/javascript" src="js/bootstrap.js"></script>
-      <script type="text/javascript" src="js/imagesloaded.pkgd.min.js"></script>
-      <script src="js/modernizr.custom.js"></script>
-      <script src="js/masonry.pkgd.min.js"></script>
-      <script src="js/imagesloaded.pkgd.min.js"></script>
-      <script src="js/classie.js"></script>
-      <script src="js/colorfinder-1.1.js"></script>
-      <script src="js/gridScrollFx.js"></script>
-      <script>
-         var masonryClass, container = $("#grid");
-         	new GridScrollFx( document.getElementById( 'grid' ), {
-         		viewportFactor : 0.4
-         	} );
-      </script>
-   </body>
+   </section>
+
+   <!-- Footer -->
+   <div data-include="footer"></div>
+
+   <!-- Scripts -->
+   <script src="js/loader_htmls.js"></script>
+   <script src="js/dynamic.js"></script>
+</body>
+
 </html>
