@@ -80,9 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing once visible
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.05, rootMargin: "0px 0px -50px 0px" }); // Lower threshold and add margin
 
     document.querySelectorAll('.fade-in-up').forEach(el => {
         observer.observe(el);
