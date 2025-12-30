@@ -652,7 +652,6 @@
         }
     </style>
 
-    <script src="js/dynamic.js"></script>
     <script>
         // DOM Elements
         const grid = document.getElementById('station-grid');
@@ -674,11 +673,36 @@
         const hiddenCountDiv = document.getElementById('hidden-count');
 
         let allStations = [];
-        let favorites = JSON.parse(localStorage.getItem('nepaliFMFavorites')) || [];
-        let brokenStations = JSON.parse(localStorage.getItem('brokenStations')) || [];
+        let favorites = [];
+        let brokenStations = [];
         let showFavoritesOnly = false;
         let sleepTimerId = null;
         let currentStation = null;
+
+        // Safely parse localStorage
+        try {
+            favorites = JSON.parse(localStorage.getItem('nepaliFMFavorites')) || [];
+        } catch (e) {
+            console.error('Error parsing favorites:', e);
+            favorites = [];
+        }
+
+        try {
+            brokenStations = JSON.parse(localStorage.getItem('brokenStations')) || [];
+        } catch (e) {
+            console.error('Error parsing brokenStations:', e);
+            brokenStations = [];
+        }
+
+        // Global Error Handler for debugging
+        window.onerror = function (msg, url, lineNo, columnNo, error) {
+            console.error('Error: ' + msg);
+            const spinner = document.querySelector('.loading-spinner');
+            if (spinner) {
+                spinner.innerHTML = `<p style="color:red">Error: ${msg}. Please refresh.</p>`;
+            }
+            return false;
+        };
 
         // Initialize
         fetch('js/stations.json')
