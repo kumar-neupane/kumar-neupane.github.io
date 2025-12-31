@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Roots - Kumar Neupane</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <style>
+        .roots-page {
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .roots-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .roots-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .roots-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .roots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 900px;
+            animation: fadeInUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .roots-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .roots-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .roots-card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .roots-card h2 span {
+            font-size: 1.5rem;
+        }
+
+        .calendar-container {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .radio-container {
+            text-align: center;
+        }
+
+        .radio-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .radio-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .radio-link:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .radio-link i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .radio-link .radio-info {
+            text-align: left;
+        }
+
+        .radio-link .radio-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .radio-link .radio-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+            color: #fff;
+        }
+
+        .back-button i {
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .loader {
+            border: 4px solid var(--glass-border);
+            border-top: 4px solid var(--accent-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="roots-page">
+        <div class="roots-header">
+            <h1><i class="fas fa-mountain"></i> Personal Roots</h1>
+            <p>Staying connected to my heritage - Nepal 🇳🇵</p>
+        </div>
+
+        <div class="roots-grid">
+            <!-- Nepali Calendar -->
+            <div class="roots-card">
+                <h2><span>🇳🇵</span> Nepali Calendar</h2>
+                <div class="calendar-container">
+                    <script type="text/javascript">
+                        var nc_width = 'responsive';
+                        var nc_height = 400;
+                        var nc_api_id = "2000y3p294";
+                    </script>
+                    <script type="text/javascript"
+                        src="https://www.ashesh.com.np/nepali-calendar/js/ncf.js?v=5"></script>
+                </div>
+            </div>
+
+            <!-- Nepal FM Radio -->
+            <div class="roots-card">
+                <h2><span>📻</span> Nepal FM Radio</h2>
+                <div class="radio-container">
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">All Nepal FM Stations</p>
+                    <div class="iframe-wrapper">
+                        <div id="loader" class="loader"></div>
+                        <iframe src="https://allnepalfm.vercel.app"
+                            onload="document.getElementById('loader').style.display='none'"
+                            style="border: none; width: 100%; height: 500px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Return to Home
+        </a>
+
+        <div class="page-footer">
+            <p>&copy; 2024 Kumar Neupane. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="js/dynamic.js"></script>
+</body>
+
+</html>

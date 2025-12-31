@@ -1,10 +1,136 @@
-<footer
-  style="text-align: center; padding: 1rem 0; color: var(--text-secondary); margin-top: 2rem; border-top: 1px solid var(--glass-border);">
+<!-- Professional Footer -->
+<footer class="site-footer">
   <div class="container">
-    <p style="margin: 0;">
-      &copy; 2024 Kumar Neupane. All rights reserved. <a href="calendar-widget.html" target="_blank"
-        style="color: var(--accent-color);"><span
-          style="font-size: 1.5em; vertical-align: middle; margin-right: 2px;">🇳🇵</span> Nepali Calendar</a>
-    </p>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-name">Kumar Neupane</span>
+        <span class="footer-title">Physicist & Researcher</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://scholar.google.com/citations?hl=en&user=MA4R8yIAAAAJ" target="_blank"
+          aria-label="Google Scholar">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+        <a href="https://github.com/kumar-neupane" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/kumar-neupane-686a57251" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+
+      <p class="footer-copyright">
+        &copy; 2024 Kumar Neupane. All rights reserved.
+        <span class="footer-separator">|</span>
+        <a href="personal-roots.html" class="personal-roots-link">
+          <span class="roots-flag">🇳🇵</span> Personal Roots
+        </a>
+      </p>
+    </div>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    padding: 2rem 0 1.5rem;
+    margin-top: 4rem;
+    border-top: 1px solid var(--glass-border);
+    background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.3) 100%);
+  }
+
+  [data-theme="light"] .site-footer {
+    background: linear-gradient(180deg, transparent 0%, rgba(226, 232, 240, 0.3) 100%);
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+
+  .footer-title {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+  }
+
+  .footer-copyright {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .footer-separator {
+    margin: 0 0.5rem;
+    opacity: 0.5;
+  }
+
+  .personal-roots-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .personal-roots-link:hover {
+    color: var(--accent-color);
+  }
+
+  .roots-flag {
+    font-size: 1em;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .footer-copyright {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-separator {
+      display: none;
+    }
+  }
+</style>

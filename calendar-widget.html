@@ -1,47 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <title>Full Nepali Calendar</title>
-</head>
-
-<body>
-  <!-- Start of Nepali calendar widget -->
-  <script type="text/javascript">
-    var nc_width = 'responsive';
-    var nc_height = 710;
-    var nc_api_id = "2000y3p294";
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nepali Calendar - Kumar Neupane</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/modern.css">
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
   </script>
-  <script type="text/javascript" src="https://www.ashesh.com.np/nepali-calendar/js/ncf.js?v=5"></script>
-  <!-- End of Nepali calendar widget -->
-  <!-- End of Nepali calendar widget -->
-  <div id="customfooter" style="margin-top:20px; text-align:center; font-family: sans-serif;">
-    <p style="margin: 0; color: #666; margin-bottom: 10px;">
-      &copy; 2024 Kumar Neupane. All rights reserved.
-      <a href="calendar-widget.html" style="color: #38bdf8; text-decoration: none;"><span
-          style="font-size: 1.5em; vertical-align: middle; margin-right: 2px;">🇳🇵</span> Nepali Calendar</a>
-    </p>
-    <a href="index.html"
-      style="display: inline-block; padding: 10px 20px; background-color: #38bdf8; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background 0.3s; margin-top: 10px;">Return
-      to Home</a>
-  </div>
   <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      background-color: #f0f4f8;
+    .calendar-page {
+      min-height: 100vh;
+      padding: 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
     }
 
-    /* Hover effect for the button */
-    a:hover {
-      background-color: #0284c7 !important;
+    .calendar-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .calendar-header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .calendar-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .calendar-container {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      width: 100%;
+      max-width: 600px;
+      animation: fadeInUp 0.6s ease-out 0.1s backwards;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-color);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      margin-top: 2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: fadeInUp 0.6s ease-out 0.2s backwards;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+      color: #fff;
+    }
+
+    .back-button i {
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer styling for this page */
+    .calendar-footer {
+      margin-top: auto;
+      padding-top: 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
     }
   </style>
+</head>
+
+<body>
+  <div class="calendar-page">
+    <div class="calendar-header">
+      <h1><span style="font-size: 1.2em;">🇳🇵</span> Nepali Calendar</h1>
+      <p>Bikram Sambat - बिक्रम संवत्</p>
+    </div>
+
+    <div class="calendar-container">
+      <!-- Start of Nepali calendar widget -->
+      <script type="text/javascript">
+        var nc_width = 'responsive';
+        var nc_height = 710;
+        var nc_api_id = "2000y3p294";
+      </script>
+      <script type="text/javascript" src="https://www.ashesh.com.np/nepali-calendar/js/ncf.js?v=5"></script>
+      <!-- End of Nepali calendar widget -->
+    </div>
+
+    <a href="index.html" class="back-button">
+      <i class="fas fa-arrow-left"></i>
+      Return to Home
+    </a>
+
+    <div class="calendar-footer">
+      <p>&copy; 2024 Kumar Neupane. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script src="js/dynamic.js"></script>
 </body>
 
 </html>
