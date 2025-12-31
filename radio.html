@@ -897,7 +897,8 @@
                 // Hide from view after short delay
                 setTimeout(() => {
                     updateHiddenCount();
-                    document.querySelector(`.station-card[data-id="${station.id}"]`)?.style.display = 'none'; // quick hide
+                    const card = document.querySelector(`.station-card[data-id="${station.id}"]`);
+                    if (card) { card.style.display = 'none'; } // quick hide
                 }, 1500);
             }
         }
